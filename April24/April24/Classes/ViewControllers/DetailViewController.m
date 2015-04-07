@@ -146,7 +146,7 @@ static NSArray  * SCOPE = nil;
             [bgButtons addSubview:userImage];
         }
         
-        
+
     }
 }
 
@@ -209,7 +209,8 @@ static NSArray  * SCOPE = nil;
     sharedImgUrl = [webInfo valueForKey:@"picture"];
     sharedUrl = @"https://itunes.apple.com/app/id838868932";
     [imgWeb setImageURL:[webInfo valueForKey:@"picture"] completion:^(UIImage *image) {
-        imgWeb.image = image;
+        //imgWeb.image = image;
+        [imgWeb setImage:image];
         shareImage = image;
     }];
     [gbImageDetailMapView addSubview:imgWeb];
@@ -240,17 +241,20 @@ static NSArray  * SCOPE = nil;
     
     for (int i = 0; i < picturesArray.count; i ++) {
         NSString * currentUrl = picturesArray[i];
+        NSString *str = [NSString stringWithFormat:@"http://april24.com/timthumb.php?w=800&h=800&zc=1&src=%@", currentUrl];
         UIImageView * currentImg = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.width)];
         [currentImg setImage:[UIImage imageNamed:@"defaultProfileImage.png"]];
         WebImage *img = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 320)];
         __weak WebImage * imgWeb = img;
-        [imgWeb setImageURL:currentUrl completion:^(UIImage *image) {
+        [imgWeb setImageURL:str completion:^(UIImage *image) {
             imgWeb.image = image;
             [images addObject:image];
         }];
         [currentImg addSubview:imgWeb];
         [imagesScrollView addSubview:currentImg];
     }
+    
+    
     
     for (int i = 0; i < videosArray.count; i ++) {
         

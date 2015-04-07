@@ -35,12 +35,12 @@
              UIButton *btnSignOut;
     IBOutlet UIButton *btnKeyBoardHide;
     
-    UITableView * tblCity;
+    UITableView * tblCountry;
     UITableView * tblCategory;
     
     
     NSMutableDictionary * locations;
-    NSDictionary* selectedCity;
+    NSDictionary* selectedCountry;
     NSDictionary* selectedCategory;
     
     NSMutableArray * countiesArray;

@@ -77,7 +77,7 @@
     tblCategory.allowsMultipleSelectionDuringEditing = YES;
     selectedCategoriesArray = [NSMutableArray new];
     [tblCategory reloadData];
-    [tblCity reloadData];
+    [tblCountry reloadData];
     [self initAccordeonView];
     
     userImage.layer.cornerRadius = 5;
@@ -146,15 +146,16 @@
     btnSelectCounty.tag = 0;
     [btnSelectCounty setImage:[UIImage imageNamed:@"btnSelectCounty"] forState:UIControlStateNormal];
     [btnSelectCounty setImage:[UIImage imageNamed:@"btnSelectCountySelected"] forState:UIControlStateSelected];
+    btnSelectCounty.titleLabel.text = @"Select Country";
     viewCity = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 160)];
     viewCity.backgroundColor = [UIColor clearColor];
-    tblCity =[[UITableView alloc]init];
-    tblCity.delegate = self;
-    tblCity.tag = 1;
-    tblCity.dataSource = self;
-    tblCity.backgroundColor = [UIColor clearColor];
-    tblCity.frame =CGRectMake(0, 0, 263, 160);
-    [viewCity addSubview:tblCity];
+    tblCountry =[[UITableView alloc]init];
+    tblCountry.delegate = self;
+    tblCountry.tag = 1;
+    tblCountry.dataSource = self;
+    tblCountry.backgroundColor = [UIColor clearColor];
+    tblCountry.frame =CGRectMake(0, 0, 263, 160);
+    [viewCity addSubview:tblCountry];
     [accordion addHeader:btnSelectCounty withView:viewCity];
     
     
@@ -275,9 +276,7 @@
 #pragma mark UITableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (tableView.tag == 1) {
-    return countiesArray.count;
-    }
+    
     return 1;
 }
 
@@ -288,8 +287,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
     if (tableView.tag == 1) {
-        NSArray * cities = [countiesArray[section] valueForKey:@"cities"];
-        return [cities count];
+        
+        return [countiesArray count];
     }
     return categories.count;
 }
@@ -309,12 +308,12 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         [checkMark setImage:[UIImage imageNamed:@""]];
         
-        NSDictionary * city = [countiesArray[indexPath.section] valueForKey:@"cities"][indexPath.row];
-        if ([city isEqualToDictionary:selectedCity]) {
+        NSDictionary * city = countiesArray[indexPath.row];
+        if ([city isEqualToDictionary:selectedCountry]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             [checkMark setImage:[UIImage imageNamed:@"checkBox.png"]];
         }
-        cell.textLabel.text = [city valueForKey:@"city"];
+        cell.textLabel.text = [city valueForKey:@"name"];
     } else {
         NSDictionary * category = categories[indexPath.row];
         [checkMark setImage:[UIImage imageNamed:@""]];
@@ -341,8 +340,8 @@
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         if (tableView.tag == 1) {
-            selectedCity = nil;
-            [tblCity reloadData];
+            selectedCountry = nil;
+            [tblCountry reloadData];
         } else {
             selectedCategory = nil;
             [selectedCategoriesArray removeObject:categories[indexPath.row]];
@@ -351,8 +350,8 @@
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         if (tableView.tag == 1) {
-            selectedCity = [countiesArray[indexPath.section] valueForKey:@"cities"][indexPath.row];
-            [tblCity reloadData];
+            selectedCountry = countiesArray[indexPath.row];
+            [tblCountry reloadData];
         } else {
             selectedCategory = categories[indexPath.row];
             [selectedCategoriesArray addObject:categories[indexPath.row]];
@@ -362,26 +361,26 @@
     [self sendRequest];
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (tableView.tag == 1) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 265, 30)];
-        view.backgroundColor =[UIColor colorWithRed:96.0/255.0 green:96.0/255.0 blue:96.0/255.0 alpha:1.0];
-        UILabel * lblCity = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 245, 20)];
-        lblCity.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0];
-        lblCity.textColor = [UIColor whiteColor];
-        lblCity.text = [countiesArray[section] valueForKey:@"name"];
-        [view addSubview:lblCity];
-        return view;
-    }
-    return nil;
-}
+//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if (tableView.tag == 1) {
+//        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 265, 30)];
+//        view.backgroundColor =[UIColor colorWithRed:96.0/255.0 green:96.0/255.0 blue:96.0/255.0 alpha:1.0];
+//        UILabel * lblCity = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 245, 20)];
+//        lblCity.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0];
+//        lblCity.textColor = [UIColor whiteColor];
+//        lblCity.text = [countiesArray[section] valueForKey:@"name"];
+//        [view addSubview:lblCity];
+//        return view;
+//    }
+//    return nil;
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (tableView.tag == 1) {
-        return 20;
-    }
-    return 0;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    if (tableView.tag == 1) {
+//        return 20;
+//    }
+//    return 0;
+//}
 
 -(void)sendRequest {
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
@@ -395,16 +394,16 @@
         }
     }
 //    NSArray * loadingInfo;
-    if (selectedCity && selectedCategoriesArray.count == 0) {
+    if (selectedCountry && selectedCategoriesArray.count == 0) {
 //        loadingInfo = [[AppManager sharedInstance] loadPointByCity_latitude:[selectedCity valueForKey:@"lat"] longitude:[selectedCity valueForKey:@"lng"] limit:10 offSet:0];
         viewController.isCanLoaded = YES;
         viewController.selectedCitylimit = 0;
-        viewController.city = selectedCity;
+        viewController.city = [selectedCountry valueForKey:@"cities"];
         viewController.isCanLoadedPointByCity = YES;
         viewController.isCanLoadedPointByCityAndCategory = NO;
         viewController.isCanLoadedPointByCategory = NO;
     }
-    else if (selectedCity && selectedCategoriesArray.count > 0){
+    else if (selectedCountry && selectedCategoriesArray.count > 0){
         NSString * categoriesID = [NSString stringWithFormat:@"%@",[selectedCategoriesArray[0] valueForKey:@"id"]];
         for (int i = 1; i < selectedCategoriesArray.count ; i ++) {
             categoriesID =[NSString stringWithFormat:@"%@,%@",categoriesID,[selectedCategoriesArray[i] valueForKey:@"id"]];
@@ -412,28 +411,28 @@
 //        loadingInfo = [[AppManager sharedInstance] loadPointByCategoriesAndCity:categoriesID latitude:[selectedCity valueForKey:@"lat"] longitude:[selectedCity valueForKey:@"lng"] limit:10 offSet:0];
         
         viewController.isCanLoaded = YES;
-        viewController.city = selectedCity;
+        viewController.city = [selectedCountry valueForKey:@"cities"];
         viewController.categoriresID = categoriesID;
         viewController.selectedCityCategorylimit = 0;
         viewController.isCanLoadedPointByCity = NO;
         viewController.isCanLoadedPointByCityAndCategory = YES;
         viewController.isCanLoadedPointByCategory = NO;
     }
-    else if (!selectedCity && selectedCategoriesArray.count > 0) {
+    else if (!selectedCountry && selectedCategoriesArray.count > 0) {
         NSString * categoriesID = [NSString stringWithFormat:@"%@",[selectedCategoriesArray[0] valueForKey:@"id"]];
         for (int i = 1; i < selectedCategoriesArray.count ; i ++) {
             categoriesID =[NSString stringWithFormat:@"%@,%@",categoriesID,[selectedCategoriesArray[i] valueForKey:@"id"]];
         }
 //        loadingInfo = [[AppManager sharedInstance] loadPointByCategory:categoriesID limit:0];
         viewController.isCanLoaded = YES;
-        viewController.city = selectedCity;
+        viewController.city = [selectedCountry valueForKey:@"cities"];
         viewController.categoriresID = categoriesID;
         viewController.selectedCategorylimit = 0;
         viewController.isCanLoadedPointByCity = NO;
         viewController.isCanLoadedPointByCityAndCategory = NO;
         viewController.isCanLoadedPointByCategory = YES;
     }
-    else if (!selectedCity && selectedCategoriesArray.count == 0) {
+    else if (!selectedCountry && selectedCategoriesArray.count == 0) {
         
 //        int count = viewController.count;
 //        int limit = 0;
