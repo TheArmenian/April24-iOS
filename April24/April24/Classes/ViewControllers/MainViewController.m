@@ -9,7 +9,6 @@
 #import "MainViewController.h"
 #import "AboutViewController.h"
 #import "FlurryAds.h"
-#import "MapViewController.h"
 
 @interface MainViewController ()
 
@@ -300,7 +299,7 @@
             
             NSMutableArray *indexPaths = [NSMutableArray new];
             
-            for (int i = self.webInfoArray.count; i < self.webInfoArray.count + [response count]; i++) {
+            for (int i = (int)self.webInfoArray.count; i < self.webInfoArray.count + [response count]; i++) {
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
                 [indexPaths addObject:indexPath];
             }
@@ -374,7 +373,7 @@
             
             for (int i = 0; i < array.count; i++) {
                 if ([dict isEqualToDictionary:array[i]]) {
-                    tag = [[dict valueForKey:@"id"] integerValue];
+                    tag = (int)[[dict valueForKey:@"id"] integerValue];
                     index = i;
                     break;
                 }
@@ -530,12 +529,7 @@
         
     }
     
-    if ([action isEqual:@"login"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController * loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        loginViewController.isFavorites = NO;
-        [self.navigationController pushViewController:loginViewController animated:YES];
-    }
+    
 }
 @end
 

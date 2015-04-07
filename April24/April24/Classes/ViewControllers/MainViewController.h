@@ -10,7 +10,6 @@
 #import "MMExampleDrawerVisualStateManager.h"
 #import "WebImage.h"
 #import "GridView.h"
-#import "LoginViewController.h"
 #import "DetailViewController.h"
 #import <MapKit/MapKit.h>
 #import "CustomPointAnnotation.h"

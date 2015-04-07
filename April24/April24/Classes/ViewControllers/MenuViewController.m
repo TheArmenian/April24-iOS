@@ -8,7 +8,6 @@
 
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "LoginViewController.h"
 
 @interface MenuViewController ()
 
@@ -221,29 +220,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)btnLoginPressed:(id)sender {
-    
-    if ([sender tag] == 4) {
-         [userImage setHidden:YES];
-        
-        [[AppManager sharedInstance] performSelectorInBackground:@selector(userLogout) withObject:nil];
-    }
-    
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-    [(UINavigationController*)self.mm_drawerController.centerViewController popToRootViewControllerAnimated:NO];
-    UINavigationController* centerViewController = (UINavigationController*)self.mm_drawerController.centerViewController;
-       UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    if (btnLogin.selected && [sender tag] == 0) {
-        EditViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"EditViewController"];
-        
-        [centerViewController pushViewController:viewController animated:NO];
-    } else {
-        LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        viewController.isFavorites = NO;
-        [centerViewController pushViewController:viewController animated:NO];
-    }
-    
-}
+
 
 - (IBAction)btnFavoritPressed:(id)sender{
 

@@ -183,7 +183,7 @@
         }
     }
     if (allowsMultipleSelection) {
-        btnTag = [sender tag];
+        btnTag = (int)[sender tag];
         
         NSMutableIndexSet *mis = [selectionIndexes mutableCopy];
         if ([selectionIndexes containsIndex:0]) {

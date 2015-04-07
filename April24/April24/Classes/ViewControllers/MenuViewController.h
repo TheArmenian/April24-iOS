@@ -11,7 +11,6 @@
 #import "AboutViewController.h"
 #import "UIViewController+MMDrawerController.h"
 #import "FavoritesViewController.h"
-#import "EditViewController.h"
 #import "MainViewController.h"
 
 

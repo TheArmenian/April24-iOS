@@ -12,7 +12,6 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "UIViewController+MMDrawerController.h"
 #import "WebImage.h"
-#import "RouteMapViewController.h"
 #import "MainViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -81,7 +80,6 @@
 @property(nonatomic,strong)NSDictionary * pointCategoryInfo;
 @property(nonatomic,strong)NSString * category;
 
-- (IBAction)btnLoginPressed:(id)sender;
 - (IBAction)btnPostPressed:(id)sender;
 - (IBAction)btnHideKeyBoardPressed:(id)sender;
 //- (IBAction)btnSelectMap:(id)sender;

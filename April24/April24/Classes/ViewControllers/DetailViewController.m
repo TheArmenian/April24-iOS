@@ -10,7 +10,7 @@
 #import <Twitter/Twitter.h>
 #import <QuartzCore/QuartzCore.h>
 #import "VKSdk.h"
-#import "CheckinsViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 static NSString *const TOKEN_KEY = @"my_application_access_token";
 static NSArray  * SCOPE = nil;
@@ -394,69 +394,9 @@ static NSArray  * SCOPE = nil;
 
 
 
-//-(void)showMap {
-//    if ((![webInfo valueForKey:@"lat"] ||![webInfo valueForKey:@"lng"])||([[webInfo valueForKey:@"lat"]floatValue] ==0 || [[webInfo valueForKey:@"lng"]floatValue] == 0)) {
-//        for (UIView * view in [mainScrollView subviews]) {
-//            if (view.frame.origin.y > detailMapView.frame.origin.y) {
-//                view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y - detailMapView.frame.size.height, view.frame.size.width, view.frame.size.height);
-//            }
-//        }
-//        btnSelectMap.hidden = YES;
-//        bgMapDetailView.frame = CGRectMake(bgMapDetailView.frame.origin.x, bgMapDetailView.frame.origin.y - detailMapView.frame.size.height, bgMapDetailView.frame.size.width, bgMapDetailView.frame.size.height);
-//        detailMapView.hidden = YES;
-//        return;
-//    }
-//        NSMutableArray * annotations =[NSMutableArray new];
-//        CLLocationCoordinate2D annotationCoord;
-//    
-//        annotationCoord.latitude = [[webInfo valueForKey:@"lat"]floatValue];
-//        annotationCoord.longitude = [[webInfo valueForKey:@"lng"]floatValue];
-//        
-//        CustomPointAnnotation *annotationPoint = [[CustomPointAnnotation alloc] init];
-//        annotationPoint.coordinate = annotationCoord;
-//        annotationPoint.title = [webInfo valueForKey:@"name"];
-//        annotationPoint.pointInfo = webInfo;
-//        annotationPoint.subtitle = category;
-//        
-//        [annotations addObject:annotationPoint];
-//        [detailMapView addAnnotation:annotationPoint];
-//                MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(annotationCoord, 3000, 3000);
-//        [detailMapView setRegion:region animated:YES];
-//        annotationPoint = nil;
-//
-//    
-//}
 
 #pragma mark - Button Handlers
 
-- (IBAction)btnCheckinTap:(id)sender {
-    
-    CheckinsViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CheckinsViewController"];
-    viewController.category = category;
-    viewController.webInfo = self.webInfo;
-    [self.navigationController pushViewController:viewController animated:YES];
-}
-
-//- (IBAction)btnSelfieTap:(id)sender {
-//    
-//    if ([AppManager sharedInstance].token.length == 0) {
-//        UINavigationController* centerViewController = (UINavigationController*)self.mm_drawerController.centerViewController;
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        
-//        LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-//        viewController.isFavorites = NO;
-//        [centerViewController pushViewController:viewController animated:NO];
-//        loadingView.hidden = YES;
-//        return;
-//    }
-//    
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    picker.delegate = self;
-//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-//    picker.allowsEditing = YES;
-//    [self presentViewController:picker animated:YES completion:nil];
-//}
 
 -(void)leftButtonPress:(id)sender{
     UINavigationController* centerViewController = (UINavigationController*)self.mm_drawerController.centerViewController;
@@ -473,7 +413,7 @@ static NSArray  * SCOPE = nil;
         if (![[currentInfo valueForKey:@"id"]isKindOfClass:[NSNull class]] && ![[webInfo valueForKey:@"id"] isKindOfClass:[NSNull class]] && [webInfo valueForKey:@"id"] && [currentInfo valueForKey:@"id"]) {
             if ([[currentInfo valueForKey:@"id"]isEqualToValue:[webInfo valueForKey:@"id"]]) {
                 
-                [currentInfo setValue:[NSNumber numberWithInt:commentsArray.count] forKey:@"comment_count"];
+                [currentInfo setValue:[NSNumber numberWithInt:(int)commentsArray.count] forKey:@"comment_count"];
                 [viewController.webInfoArray replaceObjectAtIndex:i withObject:currentInfo];
                 break;
             }
@@ -501,18 +441,7 @@ static NSArray  * SCOPE = nil;
     loadingView.hidden = YES;
 }
 
-//-(void)showDetailMap:(id)sender {
-//    if ((![webInfo valueForKey:@"lat"] ||![webInfo valueForKey:@"lng"])||([[webInfo valueForKey:@"lat"]floatValue] ==0 || [[webInfo valueForKey:@"lng"]floatValue] == 0)) {
-//        return;
-//    }
-//    UINavigationController* centerViewController = (UINavigationController*)self.mm_drawerController.centerViewController;
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    RouteMapViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"RouteMapViewController"];
-//       viewController.category = category;
-//    viewController.webInfo =webInfo;
-//    viewController.pointCategoryInfo = self.pointCategoryInfo;
-//    [centerViewController pushViewController:viewController animated:YES];
-//}
+
 
 
 - (void) sendViaEmail {
@@ -559,24 +488,6 @@ static NSArray  * SCOPE = nil;
 
 }
 
-#pragma mark UIImagePickerController 
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    UIImage *image = info[UIImagePickerControllerEditedImage];
-    
-    [picker dismissViewControllerAnimated:YES completion:nil];
-
-    loadingView.hidden = NO;
-    [WebServiceManager addSelfie:image point:[[webInfo valueForKey:@"id"] stringValue] completion:^(id response, NSError *error) {
-        loadingView.hidden = YES;
-        [self btnCheckinTap:nil];
-    }];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark  TableView Delegate methods
 
@@ -628,14 +539,7 @@ static NSArray  * SCOPE = nil;
             cell.textLabel.numberOfLines = 0;
             cell.textLabel.minimumScaleFactor = 0.5;
             cell.imageView.image =[self getCellImageViewImage:type];
-            
-            if ([type isEqual:@"address"]) {
-                UIButton *btnshowMap = [[UIButton alloc]initWithFrame:CGRectMake(260, 1, 60, 46)];
-                [btnshowMap setImage:[UIImage imageNamed:@"imgShowMap"] forState:UIControlStateNormal];
-                [btnshowMap addTarget:self action:@selector(showDetailMap:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.contentView addSubview:btnshowMap];
-                //            cell.accessoryView = btnshowMap;
-            }
+           
         }
     } else {
         
@@ -744,13 +648,6 @@ static NSArray  * SCOPE = nil;
 
 -(void)didSelectCurrentCell:(NSString*)type info:(NSString*)info{
     
-    if ([type isEqualToString:@"checkins"]) {
-        [self btnCheckinTap:nil];
-    }
-    
-//    if ([type isEqual:@"address"]) {
-//       [self showDetailMap:nil];
-//    }
     if ([type isEqual:@"tel"]) {
         NSString *cleanedString = [[info componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
         NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@", cleanedString]];
@@ -899,61 +796,7 @@ static NSArray  * SCOPE = nil;
     
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-   
-}
 
-//#pragma mark MKMapVewDelegate methods
-//- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
-//    MKPolylineView *polylineView = [[MKPolylineView alloc] initWithPolyline:overlay];
-//    polylineView.strokeColor = [UIColor redColor];
-//    polylineView.lineWidth = 5.0;
-//    
-//    return polylineView;
-//}
-//
-//-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotationPoint
-//{
-//    CustomPointAnnotation *annotation = (CustomPointAnnotation*)annotationPoint;
-//    MKAnnotationView *pinView = nil;
-//   
-//    if(annotationPoint != detailMapView.userLocation) {
-//       
-//        pinView = (MKAnnotationView *)[detailMapView dequeueReusableAnnotationViewWithIdentifier:@"123"];
-//        if(!pinView){
-//            
-//            pinView = [[MKAnnotationView alloc]  initWithAnnotation:annotation reuseIdentifier:@"123"];
-//            pinView.canShowCallout = YES;
-//            [pinView setEnabled:YES];
-//            
-//            WebImage * categoryImg =[[WebImage alloc] initWithFrame:CGRectMake(0, 0, 27, 27)];
-//            [categoryImg setImageURL:[NSString stringWithFormat:@"http://partam.partam.com%@",[self.pointCategoryInfo valueForKey:@"icon_url"]] completion:^(UIImage *image) {
-//                pinView.image = [WebImage imageByScalingAndCropping:image forSize:CGSizeMake(27, 27)];
-//            }];
-//            
-//            [categoryImg hideActivityIndicator];
-//            categoryImg.backgroundColor = [UIColor clearColor];
-//            }
-//    }
-//    
-//	return pinView;
-//}
-//- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-//{
-//    for (NSObject *annotation in [mapView annotations])
-//    {
-//        if ([annotation isKindOfClass:[MKUserLocation class]])
-//        {
-//            NSLog(@"Bring blue location dot to front");
-//            MKAnnotationView *view = [mapView viewForAnnotation:(MKUserLocation *)annotation];
-//            [[view superview] bringSubviewToFront:view];
-//        }
-//    }
-//}
-//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-//    
-//}
-//
 
 
 - (void)didReceiveMemoryWarning
@@ -1026,16 +869,7 @@ static NSArray  * SCOPE = nil;
     return YES;
 }
 
-- (IBAction)btnLoginPressed:(id)sender {
-    
-    UINavigationController* centerViewController = (UINavigationController*)self.mm_drawerController.centerViewController;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    viewController.isFavorites = NO;
-    [centerViewController pushViewController:viewController animated:NO];
-    
-}
+
 
 - (IBAction)btnPostPressed:(id)sender {
     if (txtComment.text.length > 0) {
@@ -1046,7 +880,7 @@ static NSArray  * SCOPE = nil;
 }
 -(void)sendRequest {
     
-    int pointId =[[webInfo valueForKey:@"id"] integerValue];
+    int pointId = (int)[[webInfo valueForKey:@"id"] integerValue];
     NSDictionary * dict = [[AppManager sharedInstance] addComment:txtComment.text :pointId];
     if ([[dict valueForKey:@"success"]integerValue] == 1) {
         webInfo =[[NSMutableDictionary alloc]initWithDictionary:[[AppManager sharedInstance] loadDetailInfo:pointId]];
@@ -1181,7 +1015,6 @@ static NSArray  * SCOPE = nil;
 
 #pragma mark - Twitther Share
 -(void)shareTwitter:(id)info {
-    NSString * desc = @" ";
     NSString * name = @"";
     
     if ([info valueForKey:@"name"]) {
