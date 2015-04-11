@@ -127,7 +127,6 @@
 		3AFDFCBA1AD2D0F20060B75C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFBFA1AD2D0F20060B75C /* Default-568h@2x.png */; };
 		3AFDFCBB1AD2D0F20060B75C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFBFB1AD2D0F20060B75C /* Default.png */; };
 		3AFDFCBC1AD2D0F20060B75C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFBFC1AD2D0F20060B75C /* Default@2x.png */; };
-		513440A41ACBEF43001AD0D7 /* April24-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51343F651ACBEF42001AD0D7 /* April24-Info.plist */; };
 		513440A51ACBEF43001AD0D7 /* AccordionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51343F6A1ACBEF42001AD0D7 /* AccordionView.m */; };
 		513440A61ACBEF43001AD0D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51343F6C1ACBEF42001AD0D7 /* AppDelegate.m */; };
 		513440A71ACBEF43001AD0D7 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51343F6E1ACBEF42001AD0D7 /* AppManager.m */; };
@@ -885,7 +884,7 @@
 		014976EF18BB7D5C00EE14CA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Zanazan Systems";
 			};
 			buildConfigurationList = 014976F218BB7D5C00EE14CA /* Build configuration list for PBXProject "April24" */;
@@ -1014,7 +1013,6 @@
 				3AFDFC101AD2D0F20060B75C /* bgFacebookIcon.png in Resources */,
 				3AFDFCA61AD2D0F20060B75C /* btnCategorySelected.png in Resources */,
 				3AFDFCA91AD2D0F20060B75C /* btnFavorites@2x.png in Resources */,
-				513440A41ACBEF43001AD0D7 /* April24-Info.plist in Resources */,
 				3AFDFBFD1AD2D0F20060B75C /* bgAbout-568h@2x.png in Resources */,
 				513440D61ACBEF43001AD0D7 /* PinterestSDKResources.bundle in Resources */,
 				3AFDFC0E1AD2D0F20060B75C /* bgemail.png in Resources */,
