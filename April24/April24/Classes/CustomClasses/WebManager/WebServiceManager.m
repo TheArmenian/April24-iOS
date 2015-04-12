@@ -8,7 +8,7 @@
 
 #import "WebServiceManager.h"
 
-static  NSString *wsUrl = @"http://april24.com/api/v1/";
+static  NSString *wsUrl = @"http://april24.com/app_dev.php/api/v1/";
 
 @implementation WebServiceManager
 
@@ -80,8 +80,8 @@ static  NSString *wsUrl = @"http://april24.com/api/v1/";
   
 }
 
-+ (void)loadPointByCity_latitude:(NSString*)lats longitude:(NSString*)longs limit:(int)limit offSet:(int)offSet completion:( void (^) (id response, NSError *error))handler {
-    NSString *method = [NSString stringWithFormat:@"mains/%@/lats/%@/longs/%d/limits/%d/offsets/50/distance", lats,longs,limit,offSet];
++ (void)loadPointByCountry:(NSString*)country limit:(int)limit offSet:(int)offSet completion:( void (^) (id response, NSError *error))handler {
+    NSString *method = [NSString stringWithFormat:@"mains/%@/countries/%d/limits/%d/offset", country,limit,offSet];
     NSString *params = @"";
     
     NSMutableURLRequest *request = [self requestForGetMethod:method withParams:params];
@@ -113,8 +113,8 @@ static  NSString *wsUrl = @"http://april24.com/api/v1/";
 
 }
 
-+ (void)loadPointByCategoriesAndCity:(NSString*)categories latitude:(NSString*)lats longitude:(NSString*)longs limit:(int)limit offSet:(int)offSet completion:( void (^) (id response, NSError *error))handler {
-    NSString *method = [NSString stringWithFormat:@"mains/%@/cats/%@/lats/%@/longs/%d/limits/%d/offsets/50/distance", categories,lats,longs,limit,offSet];
++ (void)loadPointByCategories:(NSString*)categories country:(NSString*)country limit:(int)limit offSet:(int)offSet completion:( void (^) (id response, NSError *error))handler {
+    NSString *method = [NSString stringWithFormat:@"mains/%@/cats/%@/countries/%d/limits/%d/offset", categories,country,limit,offSet];
     NSString *params = @"";
     
     NSMutableURLRequest *request = [self requestForGetMethod:method withParams:params];

@@ -228,7 +228,7 @@
     [AppManager sharedInstance].isFilter = YES;
     if (self.isCanLoadedPointByCity) {
         
-        [WebServiceManager loadPointByCity_latitude:[self.city valueForKey:@"lat"] longitude:[self.city valueForKey:@"lng"] limit:10 offSet:self.selectedCitylimit completion:^(id response, NSError *error) {
+        [WebServiceManager loadPointByCountry:[self.city valueForKey:@"country"] limit:10 offSet:self.selectedCitylimit completion:^(id response, NSError *error) {
             if (!error) {
                 [self changeTableViewInfo:response];
                 self.selectedCitylimit+=10;
@@ -240,7 +240,7 @@
         return;
     }
     if (self.isCanLoadedPointByCityAndCategory) {
-        [WebServiceManager loadPointByCategoriesAndCity:self.categoriresID latitude:[self.city valueForKey:@"lat"] longitude:[self.city valueForKey:@"lng"] limit:10 offSet:self.selectedCityCategorylimit completion:^(id response, NSError *error) {
+        [WebServiceManager loadPointByCategories:self.categoriresID country:[self.city valueForKey:@"country"] limit:10 offSet:self.selectedCityCategorylimit completion:^(id response, NSError *error) {
             if (!error) {
                 [self changeTableViewInfo:response];
                 self.selectedCityCategorylimit+=10;

@@ -50,7 +50,7 @@
     IBOutlet UILabel *lblUserName;
     IBOutlet UILabel *lblVersion;
 }
-- (IBAction)btnLoginPressed:(id)sender;
+
 - (IBAction)btnAboutAppPressed:(id)sender;
 - (IBAction)btnHideMenuPressed:(id)sender;
 - (IBAction)btnFavoritPressed:(id)sender;

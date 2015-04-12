@@ -190,20 +190,6 @@
     UIView *viewboutApp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     viewboutApp.backgroundColor = [UIColor clearColor];
     [accordion addHeader:btnAboutApp withView:viewboutApp];
-    btnSignOut = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 42)];
-    [btnSignOut setImage:[UIImage imageNamed:@"btnSignOut"] forState:UIControlStateNormal];
-    [btnSignOut addTarget:self action:@selector(btnLoginPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIView *viewSignOut = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    viewSignOut.backgroundColor = [UIColor clearColor];
-    [accordion addHeader:btnSignOut withView:viewSignOut];
-    btnSignOut.hidden = YES;
-    btnSignOut.tag = 4;
-    if (![AppManager sharedInstance].isLogOut) {
-        btnSignOut.hidden = NO;
-    }
-    
-    
-    
     
     [accordion setNeedsLayout];
     
@@ -281,6 +267,7 @@
 //    [tableView setTintColor:[UIColor clearColor]];
     UIImageView * checkMark =[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
     checkMark.userInteractionEnabled = YES;
+    
     if (tableView.tag == 1) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         [checkMark setImage:[UIImage imageNamed:@""]];
@@ -313,9 +300,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         cell.accessoryType = UITableViewCellAccessoryNone;
+        
         if (tableView.tag == 1) {
             selectedCountry = nil;
             [tblCountry reloadData];
@@ -360,9 +349,12 @@
 //}
 
 -(void)sendRequest {
+   
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    
     UINavigationController* centerViewController = (UINavigationController*)self.mm_drawerController.centerViewController;
     MainViewController * viewController;
+    
     for (int i = 0; i < centerViewController.viewControllers.count;i++) {
         UIViewController * vc = centerViewController.viewControllers[i];
         if ([vc isKindOfClass:[MainViewController class]]) {
@@ -375,7 +367,7 @@
 //        loadingInfo = [[AppManager sharedInstance] loadPointByCity_latitude:[selectedCity valueForKey:@"lat"] longitude:[selectedCity valueForKey:@"lng"] limit:10 offSet:0];
         viewController.isCanLoaded = YES;
         viewController.selectedCitylimit = 0;
-        viewController.city = [selectedCountry valueForKey:@"cities"];
+        viewController.city = selectedCountry;
         viewController.isCanLoadedPointByCity = YES;
         viewController.isCanLoadedPointByCityAndCategory = NO;
         viewController.isCanLoadedPointByCategory = NO;
@@ -388,7 +380,7 @@
 //        loadingInfo = [[AppManager sharedInstance] loadPointByCategoriesAndCity:categoriesID latitude:[selectedCity valueForKey:@"lat"] longitude:[selectedCity valueForKey:@"lng"] limit:10 offSet:0];
         
         viewController.isCanLoaded = YES;
-        viewController.city = [selectedCountry valueForKey:@"cities"];
+        viewController.city = selectedCountry;
         viewController.categoriresID = categoriesID;
         viewController.selectedCityCategorylimit = 0;
         viewController.isCanLoadedPointByCity = NO;
@@ -402,7 +394,7 @@
         }
 //        loadingInfo = [[AppManager sharedInstance] loadPointByCategory:categoriesID limit:0];
         viewController.isCanLoaded = YES;
-        viewController.city = [selectedCountry valueForKey:@"cities"];
+        viewController.city = selectedCountry;
         viewController.categoriresID = categoriesID;
         viewController.selectedCategorylimit = 0;
         viewController.isCanLoadedPointByCity = NO;

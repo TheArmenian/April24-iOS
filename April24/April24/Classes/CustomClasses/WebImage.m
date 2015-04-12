@@ -237,23 +237,10 @@
 
 + (UIImage*)imageByScalingAndCropping:(UIImage*)image forSize:(CGSize)targetSize {
     
-    UIImage *newImg = image;
-    UIImage *tempImage = nil;
-    UIGraphicsBeginImageContext(targetSize);
+    if (CGSizeEqualToSize(image.size, targetSize) || CGSizeEqualToSize(targetSize, CGSizeZero)) {
+        return image;
+    }
     
-    CGRect thumbnailRect = CGRectMake(0, 0, 0, 0);
-    thumbnailRect.origin = CGPointMake(0.0,0.0);
-    thumbnailRect.size.width  = targetSize.width;
-    thumbnailRect.size.height = targetSize.height;
-    
-    [newImg drawInRect:thumbnailRect];
-    
-    tempImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return tempImage;
-    /*
     UIImage *sourceImage = image;
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
@@ -271,14 +258,14 @@
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         
-        //        if (widthFactor > heightFactor)
-        //            scaleFactor = widthFactor; // scale to fit height
-        //        else
-        //            scaleFactor = heightFactor; // scale to fit width
-        //
-        
-        scaleFactor = MAX(widthFactor, heightFactor);
-        
+        if (widthFactor > heightFactor)
+        {
+            scaleFactor = widthFactor; // scale to fit height
+        }
+        else
+        {
+            scaleFactor = heightFactor; // scale to fit width
+        }
         
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
@@ -289,13 +276,15 @@
             thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
         }
         else
+        {
             if (widthFactor < heightFactor)
             {
                 thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
             }
+        }
     }
     
-    UIGraphicsBeginImageContext(targetSize);
+    UIGraphicsBeginImageContext(targetSize); // this will crop
     
     CGRect thumbnailRect = CGRectZero;
     thumbnailRect.origin = thumbnailPoint;
@@ -305,13 +294,18 @@
     [sourceImage drawInRect:thumbnailRect];
     
     newImage = UIGraphicsGetImageFromCurrentImageContext();
-    if(newImage == nil) {
+    
+    if(newImage == nil)
+    {
         NSLog(@"could not scale image");
-        return image;
     }
+    
     //pop the context to get back to the default
     UIGraphicsEndImageContext();
-    return newImage;*/
+    
+    return newImage;
+
+
 }
 
 @end

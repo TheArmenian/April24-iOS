@@ -204,7 +204,7 @@ static NSArray  * SCOPE = nil;
     images = [NSMutableArray new];
     
     [gbImageDetailMapView setImage:[UIImage imageNamed:@"defaultProfileImage.png"]];
-    WebImage *webImage = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 320)];
+    WebImage *webImage = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 400)];
     __weak WebImage * imgWeb = webImage;
     sharedImgUrl = [webInfo valueForKey:@"picture"];
     sharedUrl = @"https://itunes.apple.com/app/id838868932";
@@ -241,13 +241,13 @@ static NSArray  * SCOPE = nil;
     
     for (int i = 0; i < picturesArray.count; i ++) {
         NSString * currentUrl = picturesArray[i];
-        NSString *str = [NSString stringWithFormat:@"http://april24.com/timthumb.php?w=800&h=800&zc=1&src=%@", currentUrl];
+//        NSString *str = [NSString stringWithFormat:@"http://april24.com/timthumb.php?w=800&h=800&zc=1&src=%@", currentUrl];
         UIImageView * currentImg = [[UIImageView alloc]initWithFrame:CGRectMake(i*self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.width)];
         [currentImg setImage:[UIImage imageNamed:@"defaultProfileImage.png"]];
-        WebImage *img = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 320)];
+        WebImage *img = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 400)];
         __weak WebImage * imgWeb = img;
-        [imgWeb setImageURL:str completion:^(UIImage *image) {
-            imgWeb.image = image;
+        [imgWeb setImageURL:currentUrl completion:^(UIImage *image) {
+            imgWeb.image = [WebImage imageByScalingAndCropping:image forSize:img.frame.size];
             [images addObject:image];
         }];
         [currentImg addSubview:imgWeb];
@@ -264,7 +264,7 @@ static NSArray  * SCOPE = nil;
         [currentImg setImage:[UIImage imageNamed:@"defaultProfileImage.png"]];
         NSString * tmbUrl = [currentVideoInfo valueForKey:@"thumb"];
                 
-        WebImage *webImage = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 320)];
+        WebImage *webImage = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 400)];
         __weak WebImage * imgWeb = webImage;
         [imgWeb setImageURL:tmbUrl completion:^(UIImage *image) {
             imgWeb.image = image;
@@ -272,7 +272,7 @@ static NSArray  * SCOPE = nil;
         }];
         [currentImg addSubview:imgWeb];
         [imagesScrollView addSubview:currentImg];
-        [imagesScrollView addSubview:[self embedYouTube:[currentVideoInfo valueForKey:@"id"] frame:CGRectMake((picturesArray.count+i)*self.view.frame.size.width, 0, 320, 320)]];
+        [imagesScrollView addSubview:[self embedYouTube:[currentVideoInfo valueForKey:@"id"] frame:CGRectMake((picturesArray.count+i)*self.view.frame.size.width, 0, 320, 400)]];
         
     }
     
@@ -323,7 +323,7 @@ static NSArray  * SCOPE = nil;
                            </script>\
                            <iframe id='playerId' type='text/html' width='%d' height='%d' src='https://www.youtube.com/embed/%@?autoplay=0&controls=0&loop=0&modestbranding=0&rel=0&showinfo=0&color=white&iv_load_policy=3' frameborder='0'>\
                            </body>\
-                           </html>", 320, 320,urlString];
+                           </html>", 320, 400,urlString];
 //    <html><head><title>Video</title><style type="text/css">    html {
 //    overflow: auto;
 //    }
