@@ -27,9 +27,9 @@
         
         __weak  WebImage * imgWeb = pointView;
         [imgWeb setImageURL:[info valueForKey:@"picture"] completion:^(UIImage *image) {
-            imgWeb.image = image;
+            imgWeb.image = [WebImage imageByScalingAndCropping:image forSize:imgWeb.frame.size];
         }];
-        UILabel* lblName = [[UILabel alloc]initWithFrame:CGRectMake(99, 0, 230, 40)];
+        UILabel* lblName = [[UILabel alloc]initWithFrame:CGRectMake(99, 0, 230, 50)];
         lblName.text = [info valueForKey:@"name"];
         lblName.textColor = [UIColor blackColor];
         lblName.textAlignment = NSTextAlignmentLeft;
@@ -38,31 +38,31 @@
         lblName.backgroundColor = [UIColor clearColor];
         [self addSubview:lblName];
         
-        UIImageView * memorial = [[UIImageView alloc]initWithFrame:CGRectMake(99, 50, 11, 8)];
-        [memorial setImage:[UIImage imageNamed:@"memorial.png"]];
+        UIImageView * memorial = [[UIImageView alloc]initWithFrame:CGRectMake(99, 80, 11, 8)];
+        [memorial setImage:[UIImage imageNamed:@"inveornt"]];
         [self addSubview:memorial];
         
-        UILabel* lblCategory = [[UILabel alloc]initWithFrame:CGRectMake(115, 40, 210, 25)];
-        lblCategory.text = [[info valueForKey:@"category"] valueForKey:@"title"];
-        lblCategory.textColor = [UIColor colorWithRed:44.0/255.0 green:153.0/255.0 blue:215.0/255.0 alpha:1];
+        UILabel* lblCategory = [[UILabel alloc]initWithFrame:CGRectMake(115, 70, 210, 25)];
+        lblCategory.text = [info valueForKey:@"category"];
+        lblCategory.textColor = [UIColor darkGrayColor];
         lblCategory.textAlignment = NSTextAlignmentLeft;
         lblCategory.font = [UIFont boldSystemFontOfSize:10.0];
         lblCategory.numberOfLines = 0;
         lblCategory.backgroundColor = [UIColor clearColor];
         [self addSubview:lblCategory];
         
-        UIImageView * bluePin = [[UIImageView alloc]initWithFrame:CGRectMake(99, 70, 14, 17)];
-        [bluePin setImage:[UIImage imageNamed:@"blue_pin.png"]];
-        [self addSubview:bluePin];
-        
-        UILabel* lblAdress = [[UILabel alloc]initWithFrame:CGRectMake(115, 65, 210, 25)];
-        lblAdress.text = [info valueForKey:@"address"];
-        lblAdress.textColor = [UIColor colorWithRed:44.0/255.0 green:153.0/255.0 blue:215.0/255.0 alpha:1];
-        lblAdress.textAlignment = NSTextAlignmentLeft;
-        lblAdress.font = [UIFont boldSystemFontOfSize:10.0];
-        lblAdress.numberOfLines = 0;
-        lblAdress.backgroundColor = [UIColor clearColor];
-        [self addSubview:lblAdress];
+//        UIImageView * bluePin = [[UIImageView alloc]initWithFrame:CGRectMake(99, 70, 14, 17)];
+//        [bluePin setImage:[UIImage imageNamed:@"blue_pin.png"]];
+//        [self addSubview:bluePin];
+//        
+//        UILabel* lblAdress = [[UILabel alloc]initWithFrame:CGRectMake(115, 65, 210, 25)];
+//        lblAdress.text = [info valueForKey:@"address"];
+//        lblAdress.textColor = [UIColor colorWithRed:44.0/255.0 green:153.0/255.0 blue:215.0/255.0 alpha:1];
+//        lblAdress.textAlignment = NSTextAlignmentLeft;
+//        lblAdress.font = [UIFont boldSystemFontOfSize:10.0];
+//        lblAdress.numberOfLines = 0;
+//        lblAdress.backgroundColor = [UIColor clearColor];
+//        [self addSubview:lblAdress];
     }
     return self;
  

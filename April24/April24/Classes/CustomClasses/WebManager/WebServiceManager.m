@@ -8,7 +8,7 @@
 
 #import "WebServiceManager.h"
 
-static  NSString *wsUrl = @"http://april24.com/app_dev.php/api/v1/";
+static  NSString *wsUrl = @"http://april24.com/api/v1/";
 
 @implementation WebServiceManager
 

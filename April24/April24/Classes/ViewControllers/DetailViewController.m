@@ -152,7 +152,9 @@ static NSArray  * SCOPE = nil;
 
 -(void)sendDetailRequest {
     self.webInfo =[[NSMutableDictionary alloc] initWithDictionary:[[AppManager sharedInstance] loadDetailInfo:[[self.mainInfo valueForKey:@"id"] intValue]]];
+    [self.webInfo setValue:category forKey:@"category"];
     loadingView.hidden = YES;
+    
     if ([AppManager sharedInstance].userFavorites) {
         
         NSArray * filter = [[[AppManager sharedInstance].userFavorites valueForKey:@"favorites"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"id = %@",[webInfo valueForKey:@"id"]]];
@@ -391,10 +393,6 @@ static NSArray  * SCOPE = nil;
 }
 
 
-
-
-
-
 #pragma mark - Button Handlers
 
 
@@ -431,10 +429,10 @@ static NSArray  * SCOPE = nil;
 
     if (rightButton.selected) {
         
-        [[AppManager sharedInstance].favorites removeObject:webInfo];
+        [[AppManager sharedInstance].favorites removeObject:self.webInfo];
         
     } else {
-        [[AppManager sharedInstance].favorites addObject:webInfo];
+        [[AppManager sharedInstance].favorites addObject:self.webInfo];
     }
     
     rightButton.selected = !rightButton.selected;
