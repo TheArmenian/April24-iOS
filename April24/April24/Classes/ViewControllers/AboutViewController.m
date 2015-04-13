@@ -26,9 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([AppManager sharedInstance].isiPhone5) {
-        [bgImage setImage:[UIImage imageNamed:@"bgAbout-568h@2x"]];
-    }
+//    if ([AppManager sharedInstance].isiPhone5) {
+//        [bgImage setImage:[UIImage imageNamed:@"bgAbout-568h@2x"]];
+//    }
 	// Do any additional setup after loading the view.
 }
 

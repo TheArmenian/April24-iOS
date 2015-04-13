@@ -17,7 +17,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgAbout.png" id="y0C-fh-9pq">
+                                    <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aboutbg.png" id="y0C-fh-9pq">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
@@ -31,6 +31,23 @@
                                             <action selector="btnBackPressed:" destination="dCY-4V-EQa" eventType="touchUpInside" id="YhZ-7A-iRF"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2015 The Armenian, LLC. All Rights Reserved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XUB-zZ-dgo">
+                                        <rect key="frame" x="15" y="451" width="297" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ksb-FB-NAP">
+                                        <rect key="frame" x="15" y="192" width="289" height="251"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <mutableString key="text">The APRIL 24 app material comprises short biographies, photographs, as well as US patents, of Armenians who have contributed their talents to the greatness of American civilization. Categories include art, literature, music, theater, cinema, journalism and media, science, technology, medicine, law, public service and politics, military service, and sports, among others.
+
+Beyond the wealth of information included in the “April 24” App, its scope will be gradually expanded to comprise the contributions of outstanding Armenians to not only American civilization but those of other countries across the world, among them France, Germany, Russia, Britain, and Argentina, complete with photos and short biographies.</mutableString>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -321,8 +338,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="aboutbg.png" width="320" height="568"/>
         <image name="april24logo" width="99" height="11"/>
-        <image name="bgAbout.png" width="320" height="480"/>
         <image name="bgMenu.png" width="272" height="568"/>
         <image name="btnBack.png" width="27" height="27"/>
         <image name="homeicon" width="48" height="50"/>

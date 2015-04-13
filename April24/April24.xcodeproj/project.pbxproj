@@ -17,9 +17,7 @@
 		3A18BB14195C8FBC005C7C61 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A18BB13195C8FBC005C7C61 /* StoreKit.framework */; };
 		3A18BB16195C8FCC005C7C61 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A18BB15195C8FCC005C7C61 /* SystemConfiguration.framework */; };
 		3A18BB18195C8FD2005C7C61 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A18BB17195C8FD2005C7C61 /* libz.dylib */; };
-		3AFDFBFD1AD2D0F20060B75C /* bgAbout-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFB331AD2D0F20060B75C /* bgAbout-568h@2x.png */; };
-		3AFDFBFE1AD2D0F20060B75C /* bgAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFB341AD2D0F20060B75C /* bgAbout.png */; };
-		3AFDFBFF1AD2D0F20060B75C /* bgAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFB351AD2D0F20060B75C /* bgAbout@2x.png */; };
+		3A4E3A101ADBC99F0065379F /* aboutbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E3A0F1ADBC99F0065379F /* aboutbg@2x.png */; };
 		3AFDFC001AD2D0F20060B75C /* btnBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFB361AD2D0F20060B75C /* btnBack.png */; };
 		3AFDFC011AD2D0F20060B75C /* btnBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFB371AD2D0F20060B75C /* btnBack@2x.png */; };
 		3AFDFC061AD2D0F20060B75C /* bgDetailComment.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDFB3D1AD2D0F20060B75C /* bgDetailComment.png */; };
@@ -211,9 +209,7 @@
 		3A18BB13195C8FBC005C7C61 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3A18BB15195C8FCC005C7C61 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A18BB17195C8FD2005C7C61 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		3AFDFB331AD2D0F20060B75C /* bgAbout-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgAbout-568h@2x.png"; sourceTree = "<group>"; };
-		3AFDFB341AD2D0F20060B75C /* bgAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgAbout.png; sourceTree = "<group>"; };
-		3AFDFB351AD2D0F20060B75C /* bgAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgAbout@2x.png"; sourceTree = "<group>"; };
+		3A4E3A0F1ADBC99F0065379F /* aboutbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutbg@2x.png"; sourceTree = "<group>"; };
 		3AFDFB361AD2D0F20060B75C /* btnBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBack.png; sourceTree = "<group>"; };
 		3AFDFB371AD2D0F20060B75C /* btnBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnBack@2x.png"; sourceTree = "<group>"; };
 		3AFDFB3D1AD2D0F20060B75C /* bgDetailComment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgDetailComment.png; sourceTree = "<group>"; };
@@ -492,9 +488,7 @@
 		3AFDFB321AD2D0F20060B75C /* AboutViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3AFDFB331AD2D0F20060B75C /* bgAbout-568h@2x.png */,
-				3AFDFB341AD2D0F20060B75C /* bgAbout.png */,
-				3AFDFB351AD2D0F20060B75C /* bgAbout@2x.png */,
+				3A4E3A0F1ADBC99F0065379F /* aboutbg@2x.png */,
 				3AFDFB361AD2D0F20060B75C /* btnBack.png */,
 				3AFDFB371AD2D0F20060B75C /* btnBack@2x.png */,
 			);
@@ -934,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AFDFC261AD2D0F20060B75C /* detailLocation@2x.png in Resources */,
+				3A4E3A101ADBC99F0065379F /* aboutbg@2x.png in Resources */,
 				3AFDFC121AD2D0F20060B75C /* bgInstagramIcon.png in Resources */,
 				3AFDFCA81AD2D0F20060B75C /* btnFavorites.png in Resources */,
 				3AFDFC9F1AD2D0F20060B75C /* bgSearchBar@2x.png in Resources */,
@@ -972,7 +967,6 @@
 				3AFDFC6E1AD2D0F20060B75C /* bgTopGridView.png in Resources */,
 				3AFDFC751AD2D0F20060B75C /* logotxt@2x.png in Resources */,
 				3AFDFC6A1AD2D0F20060B75C /* bgCommentEmpty.png in Resources */,
-				3AFDFBFE1AD2D0F20060B75C /* bgAbout.png in Resources */,
 				3AFDFC001AD2D0F20060B75C /* btnBack.png in Resources */,
 				3AFDFCA01AD2D0F20060B75C /* bgTblViewCell.png in Resources */,
 				3AFDFC071AD2D0F20060B75C /* bgDetailComment@2x.png in Resources */,
@@ -1013,7 +1007,6 @@
 				3AFDFC101AD2D0F20060B75C /* bgFacebookIcon.png in Resources */,
 				3AFDFCA61AD2D0F20060B75C /* btnCategorySelected.png in Resources */,
 				3AFDFCA91AD2D0F20060B75C /* btnFavorites@2x.png in Resources */,
-				3AFDFBFD1AD2D0F20060B75C /* bgAbout-568h@2x.png in Resources */,
 				513440D61ACBEF43001AD0D7 /* PinterestSDKResources.bundle in Resources */,
 				3AFDFC0E1AD2D0F20060B75C /* bgemail.png in Resources */,
 				3AFDFC091AD2D0F20060B75C /* bgDetailViewCell@2x.png in Resources */,
@@ -1028,7 +1021,6 @@
 				3AFDFCAE1AD2D0F20060B75C /* btnSelectCountySelected.png in Resources */,
 				3AFDFC3C1AD2D0F20060B75C /* icon.png in Resources */,
 				3AFDFC0F1AD2D0F20060B75C /* bgemail@2x.png in Resources */,
-				3AFDFBFF1AD2D0F20060B75C /* bgAbout@2x.png in Resources */,
 				3AFDFCAC1AD2D0F20060B75C /* btnSelectCounty.png in Resources */,
 				3AFDFC371AD2D0F20060B75C /* blue_pin@2x.png in Resources */,
 				3AFDFC721AD2D0F20060B75C /* locationIcon.png in Resources */,
