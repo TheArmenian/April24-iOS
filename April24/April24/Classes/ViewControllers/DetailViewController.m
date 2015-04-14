@@ -155,9 +155,9 @@ static NSArray  * SCOPE = nil;
     [self.webInfo setValue:category forKey:@"category"];
     loadingView.hidden = YES;
     
-    if ([AppManager sharedInstance].userFavorites) {
+    if ([AppManager sharedInstance].favorites) {
         
-        NSArray * filter = [[[AppManager sharedInstance].userFavorites valueForKey:@"favorites"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"id = %@",[webInfo valueForKey:@"id"]]];
+        NSArray * filter = [[AppManager sharedInstance].favorites filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"id = %@",[webInfo valueForKey:@"id"]]];
         if (filter.count > 0) {
             rightButton.selected = YES;
         } else {
@@ -166,6 +166,7 @@ static NSArray  * SCOPE = nil;
     }else {
         rightButton.selected = NO;
     }
+    
     
     if (![AppManager sharedInstance].isLogOut) {
         btnLogin.hidden = YES;
@@ -209,7 +210,7 @@ static NSArray  * SCOPE = nil;
     WebImage *webImage = [[WebImage alloc] initWithFrame:CGRectMake(0, 0 , 320, 400)];
     __weak WebImage * imgWeb = webImage;
     sharedImgUrl = [webInfo valueForKey:@"picture"];
-    sharedUrl = @"https://itunes.apple.com/app/id838868932";
+    sharedUrl = @"https://itunes.apple.com/us/app/april-24/id985100298";
     [imgWeb setImageURL:[webInfo valueForKey:@"picture"] completion:^(UIImage *image) {
         //imgWeb.image = image;
         [imgWeb setImage:image];
@@ -942,7 +943,7 @@ static NSArray  * SCOPE = nil;
     } else {
         [FBSession openActiveSessionWithPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             if (error) {
-                [AppManager showMessageBox:@"Sorry, unable to login via Facebook."];
+                [AppManager showMessageBox:[NSString stringWithFormat:@"Sorry, unable to login via Facebook. %@", [error localizedDescription]]];
             } else  {
                 if (status != FBSessionStateClosed) {
                     [self publishFB:info];
@@ -970,8 +971,10 @@ static NSArray  * SCOPE = nil;
         }
     }
     
+    desc = @"April 24: Survived and Contributing - goo.gl/ZAVZv0";
+    
     NSDictionary* params = @{@"name": name,
-                             @"caption":@"PARTAM",
+                             @"caption":@"April 24",
                              @"description":desc,
                              @"link":sharedUrl,
                              @"picture":sharedImgUrl
@@ -994,17 +997,20 @@ static NSArray  * SCOPE = nil;
     if ([info valueForKey:@"name"]) {
         if (![[info valueForKey:@"name"] isKindOfClass:[NSNull class]]) {
             name = [info valueForKey:@"name"];
+            
         }
     }
+    
     //description
     if ([info valueForKey:@"description"]) {
         if (![[info valueForKey:@"description"] isKindOfClass:[NSNull class]]) {
             desc = [info valueForKey:@"description"];
             desc = [self flattenHTML:desc];
-            name = [NSString stringWithFormat:@"%@\n %@",name,desc];
+            
         }
-    }    
-    _pinterest = [[Pinterest alloc] initWithClientId:@"1440219" urlSchemeSuffix:@"prod"];
+    }
+    
+    _pinterest = [[Pinterest alloc] initWithClientId:@"1444392" urlSchemeSuffix:@"prod"];
     [_pinterest createPinWithImageURL:[NSURL URLWithString:sharedImgUrl]
                             sourceURL:[NSURL URLWithString:sharedUrl]
                           description:[NSString stringWithFormat:@"%@",name]];
@@ -1018,8 +1024,12 @@ static NSArray  * SCOPE = nil;
     if ([info valueForKey:@"name"]) {
         if (![[info valueForKey:@"name"] isKindOfClass:[NSNull class]]) {
             name = [info valueForKey:@"name"];
+            
+            name = [NSString stringWithFormat:@"%@\n %@",name, @"April 24: Survived and Contributing - goo.gl/ZAVZv0"];
         }
     }
+    
+    
     //description
 //    if ([info valueForKey:@"description"]) {
 //        if (![[info valueForKey:@"description"] isKindOfClass:[NSNull class]]) {
@@ -1058,7 +1068,7 @@ static NSArray  * SCOPE = nil;
 #pragma mark - VK Share
 -(void)shareVK:(id)info {
     SCOPE = @[VK_PER_FRIENDS, VK_PER_WALL, VK_PER_AUDIO, VK_PER_PHOTOS, VK_PER_NOHTTPS, VK_PER_EMAIL, VK_PER_MESSAGES];
-    [VKSdk initializeWithDelegate:self andAppId:@"4553914"];
+    [VKSdk initializeWithDelegate:self andAppId:@"4874951"];
     if ([VKSdk wakeUpSession])
     {
         [self startWorking];
@@ -1078,16 +1088,18 @@ static NSArray  * SCOPE = nil;
     if ([info valueForKey:@"name"]) {
         if (![[info valueForKey:@"name"] isKindOfClass:[NSNull class]]) {
             name = [info valueForKey:@"name"];
+            
+            name = [NSString stringWithFormat:@"%@\n %@",name, @"April 24: Survived and Contributing - goo.gl/ZAVZv0"];
         }
     }
-    //description
-    if ([info valueForKey:@"description"]) {
-        if (![[info valueForKey:@"description"] isKindOfClass:[NSNull class]]) {
-            desc = [info valueForKey:@"description"];
-            desc = [self flattenHTML:desc];
-            name = [NSString stringWithFormat:@"%@\n %@",name,desc];
-        }
-    }
+//    //description
+//    if ([info valueForKey:@"description"]) {
+//        if (![[info valueForKey:@"description"] isKindOfClass:[NSNull class]]) {
+//            desc = [info valueForKey:@"description"];
+//            desc = [self flattenHTML:desc];
+//            name = [NSString stringWithFormat:@"%@\n %@",name,desc];
+//        }
+//    }
     
     VKShareDialogController * shareDialog = [VKShareDialogController new];
     shareDialog.text = [NSString stringWithFormat:@"%@",name];
@@ -1115,15 +1127,21 @@ static NSArray  * SCOPE = nil;
 - (void)vkSdkAcceptedUserToken:(VKAccessToken *)token {
     [self startWorking];
 }
+
 - (void)vkSdkUserDeniedAccess:(VKError *)authorizationError {
 	[[[UIAlertView alloc] initWithTitle:nil message:@"Access denied" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
 }
-
 
 - (NSString *)flattenHTML:(NSString *)html {
     
    NSString* desc = [webDescriptionView stringByEvaluatingJavaScriptFromString:@"document.body.getElementsByTagName('article')[0].innerText;"];
     desc = [webDescriptionView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];
+    
+    if (desc.length > 100) {
+        desc = [desc substringToIndex:100];
+    }
+
+    
     return desc;
     NSScanner *theScanner;
     NSString *text = nil;
@@ -1139,6 +1157,10 @@ static NSArray  * SCOPE = nil;
     }
     //
     html = [html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if (html.length > 100) {
+        html = [html substringToIndex:100];
+    }
     
     return html;
 }

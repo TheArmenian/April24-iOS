@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb522621261192977</string>
+				<string>fb467417183412508</string>
 			</array>
 		</dict>
 		<dict>
@@ -54,9 +54,9 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>FacebookAppID</key>
-	<string>522621261192977</string>
+	<string>467417183412508</string>
 	<key>FacebookDisplayName</key>
-	<string>Partam</string>
+	<string>April 24</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>

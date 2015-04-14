@@ -689,7 +689,7 @@ static AppManager * instance = nil;
 + (void)showMessageBox:(NSString*)message {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIAlertView* alert = [[UIAlertView alloc] init];
-        alert.title = @"Partam";
+        alert.title = @"April 24";
         alert.message = message;
         
         [alert addButtonWithTitle:@"OK"];
